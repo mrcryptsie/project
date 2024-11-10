@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_block %}
+
+
+{% endblock %}
+
+{% block body_block %}
+
+{% include 'navbar.html' %}
+<header class='container'>
+
+    <!-- Jumbotron -->
+    <div class="p-5 text-center alert alert-danger" role="alert">
+        <h1 class="mb-3">Page non trouvée</h1>
+        <h4 class="mb-3">Désolé, la page est introuvable ou n'existe pas</h4>
+        <a class="btn btn-primary" href="/" role="button">Page d'accueil</a>
+    </div>
+    <!-- Jumbotron -->
+</header>
+
+{% include "footer.html" %}
+{% endblock %}

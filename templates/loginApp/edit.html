@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block body_block %}
+
+{% include 'navbar.html' %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="p-5 m-auto my-5 rounded shadow-lg col-md-6 bg-body">
+            <h3 class="text-center text-success">Mettre à jour vos informations</h3>
+            <form method="POST" class="my-5" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- 2 colonnes avec des champs de texte pour le prénom et le nom -->
+                <div class="mb-4 row">
+                    <div class="col">
+                        <div class="form-outline">
+                            {% render_field form.first_name|attr:'required:true' type="text" class="form-control" %}
+                            <label class="form-label" for="form6Example1">Prénom</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            {% render_field form.last_name|attr:'required:true' type="text" class="form-control" %}
+                            <label class="form-label" for="form6Example2">Nom</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Champ de texte -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.designation|attr:'required:true' type="text" class="form-control" %}
+                    <label class="form-label" for="form6Example3">Poste</label>
+                </div>
+
+                <!-- Champ de texte -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.address|attr:'required:false' class="form-control" %}
+                    <input type="text" class="form-control" />
+                    <label class="form-label">Adresse</label>
+                </div>
+
+                <!-- Champ de texte pour l'email -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.email|attr:'required:true' type="email" class="form-control" %}
+                    <label class="form-label">Email</label>
+                </div>
+
+                <!-- Champ de fichier pour l'image de profil -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.profile_picture type="file" class="form-control" %}
+                </div>
+
+                <!-- Champ de numéro de téléphone -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.phone|attr:'required:true' type="number" class="form-control" %}
+                    <label class="form-label">Téléphone</label>
+                </div>
+
+                <!-- Champ de texte pour les informations supplémentaires -->
+                <div class="mb-4 form-outline">
+                    {% render_field form.information|attr:'required:true' rows="4" class="form-control" %}
+                    <label class="form-label">Informations supplémentaires</label>
+                </div>
+
+                <!-- Case à cocher -->
+                <div class="mb-4 form-check d-flex justify-content-center">
+                    <input class="form-check-input me-2" type="checkbox" value="" checked />
+                    <label class="form-check-label"> Mettre à jour les détails du compte ? </label>
+                </div>
+
+                <!-- Bouton de soumission -->
+                <button type="submit" class="mb-4 btn btn-primary btn-block">Mettre à jour le compte</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

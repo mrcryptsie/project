@@ -1,0 +1,58 @@
+{% extends 'admin/adminbase.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+{% block title_block %}
+    <title>Ajout d'une catégorie d'herbicide</title>
+{% endblock %}
+
+{% block body_block %}
+<div class="container my-5 mx-auto" style="position: absolute;top: auto;">
+
+    <div class="row my-5">
+        <div class="p-5 m-auto rounded shadow-lg col-sm-6 col-md-4 bg-body">
+            <h3 class="text-center text-success">Ajouter une catégorie d'herbicide</h3>
+
+            <form method="POST" class="my-5">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="my-2">
+                        <div class="row">
+                            <div class="m-auto col">
+                                <div class="text-center alert alert-danger" role="alert">
+                                    Il y a des erreurs dans votre formulaire, veuillez vérifier.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="mb-4 form-outline">
+                    {% render_field form.herbicide_name class="form-control" %}
+                    <label class="form-label" for="id_herbicide_name">Nom de l'herbicide</label>
+                </div>
+
+                <div class="mb-4 form-outline">
+                    {% render_field form.unit_cost class="form-control" %}
+                    <label class="form-label" for="id_unit_cost">Coût unitaire (en FCFA)</label>
+                </div>
+
+                <div class="mb-4 form-outline">
+                    {% render_field form.labor_cost_per_ha class="form-control" %}
+                    <label class="form-label" for="id_labor_cost_per_ha">Coût de travail par ha (en FCFA)</label>
+                </div>
+
+                <div class="mb-4 form-outline">
+                    {% render_field form.file_fee_fcfa class="form-control" %}
+                    <label class="form-label" for="id_file_fee_fcfa">Frais de dossier (en FCFA)</label>
+                </div>
+
+                <button type="submit" class="mb-4 btn btn-primary btn-block">Ajouter la catégorie</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

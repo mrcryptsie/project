@@ -1,0 +1,60 @@
+{% extends 'admin/adminbase.html' %}
+
+{% load static %}
+
+{% block block_js %}
+<script>
+
+</script>
+{% endblock %}
+
+{% block css_block %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <h1 class="text-center text-primary">LISTE DES INSCRITS</h1>
+    <div class="users my-5">
+
+        <table class="table table-light table-hover table-bordered table-striped text-center">
+            <thead class="bg-dark">
+                <tr class="text-dark">
+                    <th scope="col">N°</th>
+                    <th scope="col">ID Utilisateur</th>
+                    <th scope="col">Nom d'Utilisateur</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for utilisateur in users %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{utilisateur.id}}</td>
+                    <td>{{utilisateur}}</td>
+                    <td><img src="/media/{{utilisateur.profile_picture}}" alt="Photo de Profil" height="40px" width="40px" /></td>
+                    <td>{{utilisateur.first_name}}</td>
+                    <td>{{utilisateur.last_name}}</td>
+                    <td>{{utilisateur.email}}</td>
+                    <td>
+                        <a href="{% url 'managerApp:user_remove' utilisateur.id %}">
+                            <button type="button" id="btn-confirm" class="btn btn-danger btn-sm px-3">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

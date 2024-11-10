@@ -1,0 +1,59 @@
+{% extends 'admin/adminbase.html' %}
+
+{% load static %}
+
+{% block css_block %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <h1 class="text-center text-primary">Crédit Approuvé</h1>
+    <div class="users my-5">
+
+        <table class="table table-light table-hover table-bordered table-striped text-center">
+            <thead class="bg-dark">
+                <tr class="text-dark">
+                    <th scope="col">N°</th>
+                    <th scope="col">ID Crédit</th>
+                    <th scope="col">ID Utilisateur</th>
+                    <th scope="col">Nom d'Utilisateur</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Date de Demande</th>
+                    <th scope="col">Date d'Approbation</th>
+                    <th scope="col">Année</th>
+                    <th scope="col">Email du Client</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for credit in approvedLoan %}
+
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{credit.id}}</td>
+                    <td>{{credit.customer.id}}</td>
+                    <td>{{credit}}</td>
+                    <td>
+                        <button type="button" class="btn btn-info text-white btn-sm px-3">
+                            {{credit.status}}
+                        </button>
+                    </td>
+                    <td>{{credit.category}}</td>
+                    <td>{{credit.amount}} Tk</td>
+                    <td>{{credit.request_date}}</td>
+                    <td>{{credit.status_date}}</td>
+                    <td>{{credit.year}}</td>
+                    <td>{{credit.customer.user.email}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

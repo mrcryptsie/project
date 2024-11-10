@@ -1,0 +1,75 @@
+{% extends 'admin/adminbase.html' %}
+
+{% load static %}
+
+{% block block_js %}
+<script>
+
+</script>
+{% endblock %}
+
+{% block css_block %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <h1 class="text-center text-primary">Demande de Prêt de Clients</h1>
+    <div class="users my-5">
+
+        <table class="table table-light table-hover table-bordered table-striped text-center">
+            <thead class="bg-dark">
+                <tr class="text-dark">
+                    <th scope="col">N°</th>
+                    <th scope="col">ID Prêt</th>
+                    <th scope="col">ID Utilisateur</th>
+                    <th scope="col">Nom d'utilisateur</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Montant de la Demande</th>
+                    <th scope="col">Date de Demande</th>
+                    <th scope="col">Année</th>
+                    <th scope="col">Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loan in loanrequest %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ loan.id }}</td>
+                    <td>{{ loan.customer.id }}</td>
+                    <td>{{ loan }}</td>
+                    <td>
+                        <button type="button" class="btn btn-info text-white btn-sm px-3">
+                            {{ loan.status }}
+                        </button>
+                    </td>
+                    <td>{{ loan.category }}</td>
+                    <td>{{ loan.amount }} Tk</td>
+                    <td>{{ loan.request_date }}</td>
+                    <td>{{ loan.year }}</td>
+                    <td>{{ loan.customer.user.email }}</td>
+                    <td>
+                        <a href="{% url 'managerApp:approved_request' loan.id %}">
+                            <button type="button" class="btn btn-success btn-sm px-3">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'managerApp:rejected_request' loan.id %}">
+                            <button type="button" class="btn btn-danger btn-sm px-3">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

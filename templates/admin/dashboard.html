@@ -1,0 +1,122 @@
+{% extends 'admin/adminbase.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block css_block %}
+<style>
+    #second-part {
+        margin: auto;
+    }
+
+    .status {
+        border-radius: 10px;
+        color: white;
+        margin: 10px 20px;
+        padding: 20px;
+    }
+
+    .deposit {
+        background-color: slateblue;
+    }
+
+    .withdraw {
+        background-color: lightsalmon;
+    }
+
+    .balance {
+        background-color: rgb(231, 198, 6);
+    }
+
+    #digit {
+        font-size: 60px;
+        font-weight: bold;
+        text-align: end;
+    }
+
+    .common-section {
+        padding: 30px;
+        margin: 50px 20px;
+        box-shadow: 0 0 10px;
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container ">
+    <div class="mb-5 text-center alert alert-primary" role="alert">
+        <h1>Tableau de bord d’administration</h1>
+    </div>
+    <div id="second-part">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="deposit status">
+                    <h3>Total Clients</h3>
+                    <h1> <span id="digit">{{totalCustomer}}</span> </h1>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h3>Demandes en attente</h3>
+                    <h1> <span id='digit'>{{request}}</span> </h1>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="bg-info status">
+                    <h3>Crédit approuvé</h3>
+                    <h1><span id="digit">{{approved}}</span></h1>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="status" style="background-color:#95CEFF">
+                    <h3>Crédit rejeté</h3>
+                    <h1><span id="digit">{{rejected}}</span></h1>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="status" style="background-color:#90ED7D">
+                    <h3>Total à payer Crédit</h3>
+                    {% if totalPayable %}
+                    <h1><span id="digit">XOF {{ totalPayable|sub:0 }}</span></h1>
+                    {% else %}
+                    <h1><span id="digit">XOF 0</span></h1>
+                    {% endif %}
+                </div>
+            </div>
+            <!--div class="col-md-4 ">
+                <div class="status" style="background-color:#FF7599">
+                    <h3>Total du crédit approuvé</h3>
+                    {% if totalLoan %}
+                    <h1><span id="digit">XOF {{totalLoan|sub:0}}</span></h1>
+                    {% else %}
+                    <h1><span id="digit">XOF 0</span></h1>
+                    {% endif %}
+                </div>
+            </div-->
+            <div class="col-md-4 ">
+                <div class="status" style="background-color:#EF5350">
+                    <h3>Total du crédit payé</h3>
+                    {% if totalPaid %}
+                    <h1><span id="digit">XOF {{totalPaid|sub:0}}</span></h1>
+                    {% else %}
+                    <h1><span id="digit">XOF 0</span></h1>
+                    {% endif %}
+                </div>
+            </div>
+            <!--div class="col-md-4 ">
+                <div class="status" style="background-color:#42A5F5">
+                    <h3>Total dû Crédit</h3>
+                    {% if totalPayable and totalPaid %}
+                    <h1><span id="digit">XOF {{ totalPayable|sub:totalPaid }}</span></h1>
+                    {% elif totalPayable %}
+                    <h1><span id="digit">XOF {{ totalPayable|sub:0 }}</span></h1>
+                    {% else %}
+                    <h1><span id="digit">XOF 0</span></h1>
+                    {% endif %}
+                </div>
+            </div-->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
